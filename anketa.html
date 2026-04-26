@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВЕЧНЫЙ ДАНЖ · АНКЕТНИЦА</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="anketa.css?v=5">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">[ ВЕЧНЫЙ ДАНЖ ]</a>
+  <nav class="site-nav">
+    <a href="index.html">БАЗА</a>
+    <a href="calc.html">ТЕРМИНАЛ ИМ</a>
+    <a href="elements.html">ЭЛЕМЕНТЫ</a>
+    <a href="classes.html">КЛАССЫ</a>
+    <a href="bestiary.html">БЕСТИАРИЙ</a>
+    <a href="anketa.html" style="color:var(--green)">АНКЕТНИЦА</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="page-title">// БАЗА ДАННЫХ</div>
+  <h1 class="page-heading">Анкетница</h1>
+  <p class="page-sub">Реестр сталкеров · <span id="char-count">0</span> записей</p>
+
+  <div class="filters-row">
+    <input class="filter-search" type="text" id="search-input" placeholder="поиск по имени...">
+    <button class="filter-btn active" data-school="all">ВСЕ</button>
+    <button class="filter-btn" data-school="🔥">🔥</button>
+    <button class="filter-btn" data-school="💧">💧</button>
+    <button class="filter-btn" data-school="🌪️">🌪️</button>
+    <button class="filter-btn" data-school="💎">💎</button>
+    <button class="filter-btn" data-school="🌿">🌿</button>
+    <button class="filter-btn" data-school="🌒">🌒</button>
+    <button class="filter-btn" data-school="☀️">☀️</button>
+    <button class="filter-btn" data-school="👻">👻</button>
+    <button class="filter-btn" data-school="🌐">🌐</button>
+    <button class="filter-btn" data-school="💠">💠</button>
+    <button class="filter-btn" data-school="😈">😈</button>
+    <button class="filter-btn" data-school="☸️">☸️</button>
+    <button class="filter-btn" data-school="⚫">⚫</button>
+    <button class="filter-btn" data-school="🩸">🩸</button>
+    <button class="filter-btn" data-school="🔱">🔱</button>
+    <button class="filter-btn" data-school="✨">✨</button>
+    <button class="btn-new" id="btn-create">+ СОЗДАТЬ АНКЕТУ</button>
+  </div>
+
+  <div class="cards-grid" id="cards-grid">
+    <div class="empty-state">
+      <span>[ — ]</span>
+      Анкет пока нет. Создайте первую.
+    </div>
+  </div>
+</main>
+
+<!-- VIEW MODAL -->
+<div class="modal-overlay" id="view-modal">
+  <div class="modal">
+    <button class="modal-close" id="view-close">✕</button>
+    <div class="modal-title">// АНКЕТА СТАЛКЕРА</div>
+    <div id="view-content"></div>
+  </div>
+</div>
+
+<!-- EDIT/CREATE MODAL -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <button class="modal-close" id="edit-close">✕</button>
+    <div class="modal-title" id="edit-modal-title">// СОЗДАТЬ АНКЕТУ</div>
+
+    <div class="form-section-title">ОСНОВНОЕ</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">ИМЯ</label>
+        <input class="form-input" id="f-name" type="text" placeholder="Имя персонажа">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ПРОЗВИЩЕ</label>
+        <input class="form-input" id="f-nick" type="text" placeholder="Прозвище">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ВОЗРАСТ</label>
+        <input class="form-input" id="f-age" type="text" placeholder="...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">РОСТ / ВЕС</label>
+        <input class="form-input" id="f-size" type="text" placeholder="170 см / 65 кг">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ПОЛ</label>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="f-gender" value="Мужской" id="f-gender-m"> Мужской</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="f-gender" value="Женский" id="f-gender-f"> Женский</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">КЛАСС</label>
+        <input class="form-input" id="f-class" type="text" placeholder="Класс персонажа">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ОСОЗНАННОСТЬ (%)</label>
+        <input class="form-input" id="f-aware" type="number" min="0" max="100" value="100">
+      </div>
+    </div>
+
+    <div class="form-section-title">МАНА</div>
+    <div class="mana-editor-list" id="mana-editor-list"></div>
+    <button class="btn-add-ability" id="btn-add-mana">+ ДОБАВИТЬ ТИП МАНЫ</button>
+
+    <div class="form-section-title">ГЕНОМ</div>
+    <div class="form-group">
+      <label class="form-label">ГЕНОМ (каждая раса с новой строки)</label>
+      <textarea class="form-textarea" id="f-genome" placeholder="Человек — 100%&#10;Светлый дух — 10%"></textarea>
+    </div>
+
+    <div class="form-section-title">МАГИЯ</div>
+    <div class="form-group">
+      <label class="form-label">ШКОЛЫ МАГИИ</label>
+      <textarea class="form-textarea" id="f-schools" placeholder="Пиромантия&#10;Аэромантия"></textarea>
+    </div>
+    <div class="form-group" style="margin-top:10px;">
+      <label class="form-label">ИСТОЧНИКИ МАГИИ</label>
+      <textarea class="form-textarea" id="f-sources" placeholder="Источник Огня — Средний (100) — 500 ИМ"></textarea>
+    </div>
+    <div class="form-group" style="margin-top:10px;">
+      <label class="form-label">МОДИФИКАЦИИ</label>
+      <textarea class="form-textarea" id="f-mods" placeholder="Модификации тела, духа и т.п."></textarea>
+    </div>
+
+    <div class="form-section-title">СПОСОБНОСТИ</div>
+    <div class="ability-editor-list" id="ability-editor-list"></div>
+    <button class="btn-add-ability" id="btn-add-ability">+ ДОБАВИТЬ СПОСОБНОСТЬ</button>
+
+    <div class="form-actions">
+      <button class="btn-delete" id="btn-delete" style="display:none">УДАЛИТЬ</button>
+      <button class="btn-cancel" id="btn-cancel-edit">ОТМЕНА</button>
+      <button class="btn-save" id="btn-save">СОХРАНИТЬ</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<!-- Firebase Config -->
+<script src="firebase-config.js?v=5"></script>
+<script src="firebase.js?v=5"></script>
+<!-- App Scripts -->
+<script src="anketa.js?v=5"></script>
+</body>
+</html>

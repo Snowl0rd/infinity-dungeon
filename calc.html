@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВЕЧНЫЙ ДАНЖ · ТЕРМИНАЛ ИМ</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080f0a;
+  --bg2: #0c1510;
+  --bg3: #101d14;
+  --border: #1a3d2b;
+  --border2: #2a5a3a;
+  --green: #00ff88;
+  --green2: #00cc66;
+  --green3: #7aaa8a;
+  --green4: #3a6a4a;
+  --text: #c8ffd4;
+  --muted: #5a8a6a;
+  --dim: #2a4a35;
+  --red: #cc4444;
+  --amber: #ccaa00;
+  --mono: 'Share Tech Mono', monospace;
+  --sans: 'Exo 2', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  min-height: 100vh;
+}
+
+.site-header {
+  border-bottom: 0.5px solid var(--border);
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.site-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 3px;
+  text-decoration: none;
+}
+.site-nav { display: flex; gap: 1.5rem; }
+.site-nav a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color .2s;
+}
+.site-nav a:hover { color: var(--green); }
+.site-nav a.active { color: var(--green); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+.page-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green2);
+  letter-spacing: 4px;
+  margin-bottom: 0.4rem;
+}
+.page-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 0.25rem;
+}
+.page-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.calculator-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.form-section {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-section-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--green2);
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+  border-bottom: 0.5px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.form-group.full { grid-column: 1/-1; }
+
+.form-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--mono);
+  letter-spacing: 1px;
+}
+
+.form-input, .form-select, .form-textarea {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  padding: 7px 10px;
+  background: var(--bg);
+  border: 0.5px solid var(--border2);
+  border-radius: 4px;
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--green2); }
+.form-select option { background: var(--bg); }
+.form-textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-calculate {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 10px 24px;
+  border: 0.5px solid var(--green);
+  border-radius: 3px;
+  background: rgba(0,255,136,0.08);
+  color: var(--green);
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all .2s;
+  width: 100%;
+  margin-top: 1rem;
+}
+.btn-calculate:hover { background: rgba(0,255,136,0.16); }
+
+.results-section {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.result-item:last-child { border-bottom: none; }
+
+.result-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+  letter-spacing: 1px;
+}
+
+.result-value {
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 600;
+  font-family: var(--mono);
+}
+
+.result-value.highlight {
+  font-size: 18px;
+  color: var(--green);
+}
+
+.result-value.mana {
+  color: var(--amber);
+}
+
+.calculation-steps {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--green3);
+  line-height: 1.6;
+}
+
+.step {
+  margin-bottom: 6px;
+  padding-left: 12px;
+  position: relative;
+}
+.step::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+}
+
+.info-box {
+  background: rgba(0,255,136,0.05);
+  border: 0.5px solid var(--border2);
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 1rem;
+  font-size: 12px;
+  color: var(--green3);
+  line-height: 1.5;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.checkbox-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.checkbox-group label {
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .calculator-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">[ ВЕЧНЫЙ ДАНЖ ]</a>
+  <nav class="site-nav">
+    <a href="index.html">БАЗА</a>
+    <a href="calc.html" class="active">ТЕРМИНАЛ ИМ</a>
+    <a href="elements.html">ЭЛЕМЕНТЫ</a>
+    <a href="classes.html">КЛАССЫ</a>
+    <a href="bestiary.html">БЕСТИАРИЙ</a>
+    <a href="anketa.html">АНКЕТНИЦА</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="page-title">// ТЕРМИНАЛ ИМ</div>
+  <h1 class="page-heading">Калькулятор Индекса Мощи</h1>
+  <p class="page-sub">Расчёт ИМ фрагментов с учётом всех модификаторов</p>
+
+  <div class="calculator-layout">
+    <div class="input-section">
+      <div class="form-section">
+        <div class="form-section-title">БАЗОВЫЕ ПАРАМЕТРЫ</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">НОМЕР ЭТАЖА</label>
+            <input class="form-input" type="number" id="floor-number" value="1" min="1" placeholder="Номер этажа">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ТИП МАГИИ</label>
+            <select class="form-select" id="magic-type">
+              <option value="standard">Стандартная</option>
+              <option value="hybrid">Гибридная</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">СОПРЯЖЕНИЕ ТЕРМИНАЛА</div>
+        <div class="form-group">
+          <label class="form-label">УРОВЕНЬ СОПРЯЖЕНИЯ</label>
+          <select class="form-select" id="terminal-level">
+            <option value="satisfactory">Удовлетворительный (без изменений)</option>
+            <option value="improved">Улучшенный (×2)</option>
+            <option value="ideal">Идеальный (×3)</option>
+            <option value="minimal">Минимальный (×0.75)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">СТАТУС МОБА</div>
+        <div class="form-group">
+          <label class="form-label">ТЕГИ (можно несколько)</label>
+          <div class="checkbox-group"><input type="checkbox" id="mob-inferior"><label for="mob-inferior">Низший вид (×0.75)</label></div>
+          <div class="checkbox-group"><input type="checkbox" id="mob-superior"><label for="mob-superior">Высший вид (×1.5)</label></div>
+          <div class="checkbox-group"><input type="checkbox" id="mob-boss"><label for="mob-boss">Босс (×2)</label></div>
+          <div class="checkbox-group"><input type="checkbox" id="mob-floorboss"><label for="mob-floorboss">Босс Этажа (×2.5)</label></div>
+          <div class="checkbox-group"><input type="checkbox" id="mob-calamity"><label for="mob-calamity">Бедствие (×3.5)</label></div>
+          <div class="checkbox-group"><input type="checkbox" id="mob-reward"><label for="mob-reward">Награда</label></div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">ЭФИРНЫЕ ФРАГМЕНТЫ</div>
+        <div id="ether-list"></div>
+        <button class="btn-calculate" id="btn-add-ether" style="margin-top:0.5rem;padding:6px 14px;width:auto;font-size:11px;">+ ДОБАВИТЬ ЭФИРКУ</button>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">ГЕНОМ</div>
+        <div class="form-group">
+          <label class="form-label">СХОЖИЕ РАСЫ (кол-во)</label>
+          <input class="form-input" type="number" id="genome-races" value="0" min="0" placeholder="Количество схожих рас">
+        </div>
+        <div class="info-box">
+          Каждая схожая раса даёт +25% к ИМ
+        </div>
+      </div>
+
+      <button class="btn-calculate" id="btn-calculate">РАССЧИТАТЬ ИМ</button>
+    </div>
+
+    <div class="results-section">
+      <div class="form-section-title">РЕЗУЛЬТАТЫ</div>
+
+      <div class="result-item">
+        <span class="result-label">Базовый ИМ</span>
+        <span class="result-value" id="result-base">—</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">После сопряжения</span>
+        <span class="result-value" id="result-terminal">—</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">После статуса моба</span>
+        <span class="result-value" id="result-mob">—</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">После эфирки</span>
+        <span class="result-value" id="result-ether">—</span>
+      </div>
+      <div class="result-item">
+        <span class="result-label">После генома</span>
+        <span class="result-value" id="result-genome">—</span>
+      </div>
+
+      <div class="result-item" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--green2);">
+        <span class="result-label">ИТОГОВЫЙ ИМ</span>
+        <span class="result-value highlight" id="result-final">—</span>
+      </div>
+
+      <div class="result-item">
+        <span class="result-label">ТИР СПОСОБНОСТИ</span>
+        <span class="result-value" id="result-tier">—</span>
+      </div>
+
+      <div class="result-item">
+        <span class="result-label">КРУГ МАГИИ</span>
+        <span class="result-value" id="result-circle">—</span>
+      </div>
+
+      <div class="result-item" id="result-upgrade-block" style="display:none;">
+        <span class="result-label">ИМ ДЛЯ УЛУЧШЕНИЯ</span>
+        <span class="result-value" id="result-upgrade" style="color:var(--amber)">—</span>
+      </div>
+
+      <div class="result-item">
+        <span class="result-label">СТОИМОСТЬ В МАНЕ</span>
+        <span class="result-value mana" id="result-mana">—</span>
+      </div>
+
+      <div class="calculation-steps" id="calculation-steps">
+        Нажмите "Рассчитать" для получения результатов
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+let etherFragments = [];
+
+const ETHER_ELEMENTS = [
+  { value: 'none', label: 'Без элемента' },
+  { value: 'fire', label: '🔥 Огонь' },
+  { value: 'water', label: '💧 Вода' },
+  { value: 'air', label: '🌪️ Воздух' },
+  { value: 'earth', label: '💎 Земля' },
+  { value: 'nature', label: '🌿 Природа' },
+  { value: 'dark', label: '🌒 Тьма' },
+  { value: 'light', label: '☀️ Свет' },
+];
+
+function renderEtherList() {
+  const list = document.getElementById('ether-list');
+  list.innerHTML = etherFragments.map((e, i) => `
+    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px;background:var(--bg);border:0.5px solid var(--border);border-radius:4px;padding:8px;">
+      <select class="form-select" onchange="etherFragments[${i}].type=this.value;calculateIM()">
+        <option value="main" ${e.type==='main'?'selected':''}>Основной (+50%)</option>
+        <option value="additional" ${e.type==='additional'?'selected':''}>Дополнительный (+25%)</option>
+      </select>
+      <select class="form-select" onchange="etherFragments[${i}].element=this.value;calculateIM()">
+        ${ETHER_ELEMENTS.map(el=>`<option value="${el.value}" ${e.element===el.value?'selected':''}>${el.label}</option>`).join('')}
+      </select>
+      <button onclick="etherFragments.splice(${i},1);renderEtherList();calculateIM()" style="font-family:var(--mono);font-size:13px;color:var(--red);background:none;border:none;cursor:pointer;padding:4px;">✕</button>
+    </div>
+  `).join('');
+}
+
+document.getElementById('btn-add-ether').addEventListener('click', () => {
+  etherFragments.push({ type: 'main', element: 'none' });
+  renderEtherList();
+  calculateIM();
+});
+
+function calculateIM() {
+  const floor = parseInt(document.getElementById('floor-number').value) || 1;
+  const baseIM = floor * 5;
+  const magicType = document.getElementById('magic-type').value;
+  const terminalLevel = document.getElementById('terminal-level').value;
+
+  // Теги моба — мультипликаторы стакаются перемножением
+  let mobMultiplier = 1;
+  const isReward = document.getElementById('mob-reward').checked;
+  if (document.getElementById('mob-inferior').checked) mobMultiplier *= 0.75;
+  if (document.getElementById('mob-superior').checked) mobMultiplier *= 1.5;
+  if (document.getElementById('mob-boss').checked) mobMultiplier *= 2;
+  if (document.getElementById('mob-floorboss').checked) mobMultiplier *= 2.5;
+  if (document.getElementById('mob-calamity').checked) mobMultiplier *= 3.5;
+
+  const genomeRaces = parseInt(document.getElementById('genome-races').value) || 0;
+
+  let currentIM = baseIM;
+  let steps = [];
+
+  steps.push(`Этаж ${floor} → Базовый ИМ: ${floor} × 5 = ${baseIM}`);
+
+  // Сопряжение
+  let terminalMultiplier = 1;
+  let manaModifier = 0;
+  switch (terminalLevel) {
+    case 'ideal':
+      terminalMultiplier = 3;
+      steps.push(`Идеальное сопряжение: × 3 = ${currentIM * 3} (-25% нагрузка)`);
+      break;
+    case 'improved':
+      terminalMultiplier = 2;
+      manaModifier = 0.5;
+      steps.push(`Улучшенное сопряжение: × 2 = ${currentIM * 2} (+50% мана от прибавки)`);
+      break;
+    case 'minimal':
+      terminalMultiplier = 0.75;
+      manaModifier = 0.5;
+      steps.push(`Минимальное сопряжение: × 0.75 = ${currentIM * 0.75} (+50% мана, +50% нагрузка)`);
+      break;
+    default:
+      steps.push(`Удовлетворительное сопряжение: без изменений`);
+  }
+  currentIM *= terminalMultiplier;
+  document.getElementById('result-terminal').textContent = Math.round(currentIM);
+
+  // Статус моба
+  if (mobMultiplier !== 1) {
+    steps.push(`Теги моба: × ${mobMultiplier} = ${Math.round(currentIM * mobMultiplier)}`);
+    currentIM *= mobMultiplier;
+  } else {
+    steps.push(`Статус моба: обычный, без изменений`);
+  }
+  if (isReward) steps.push(`Награда: +улучшение способности`);
+  document.getElementById('result-mob').textContent = Math.round(currentIM);
+
+  // Эфирки
+  if (etherFragments.length > 0) {
+    let etherBonus = 0;
+    etherFragments.forEach(e => { etherBonus += e.type === 'main' ? 0.5 : 0.25; });
+    steps.push(`Эфирные фрагменты (${etherFragments.length} шт.): × ${1 + etherBonus} = ${Math.round(currentIM * (1 + etherBonus))}`);
+    currentIM *= (1 + etherBonus);
+  } else {
+    steps.push(`Эфирные фрагменты: отсутствуют`);
+  }
+  document.getElementById('result-ether').textContent = Math.round(currentIM);
+
+  // Геном
+  if (genomeRaces > 0) {
+    const genomeBonus = genomeRaces * 0.25;
+    steps.push(`Геном (${genomeRaces} схожих рас): × ${1 + genomeBonus} = ${Math.round(currentIM * (1 + genomeBonus))}`);
+    currentIM *= (1 + genomeBonus);
+  } else {
+    steps.push(`Геном: отсутствует`);
+  }
+  document.getElementById('result-genome').textContent = Math.round(currentIM);
+
+  const finalIM = Math.round(currentIM);
+  document.getElementById('result-final').textContent = finalIM;
+  document.getElementById('result-base').textContent = baseIM;
+
+  // Тир
+  let tier = 'I', circle = 'I круг';
+  if (magicType === 'standard') {
+    if (finalIM >= 1500) { tier = 'VI'; circle = 'VI круг'; }
+    else if (finalIM >= 701) { tier = 'V'; circle = 'V круг'; }
+    else if (finalIM >= 121) { tier = 'IV'; circle = 'IV круг'; }
+    else if (finalIM >= 51) { tier = 'III'; circle = 'III круг'; }
+    else if (finalIM >= 21) { tier = 'II'; circle = 'II круг'; }
+  } else {
+    if (finalIM >= 960) { tier = 'IV'; circle = 'IV круг'; }
+    else if (finalIM >= 481) { tier = 'III'; circle = 'III круг'; }
+    else if (finalIM >= 121) { tier = 'II'; circle = 'II круг'; }
+  }
+  document.getElementById('result-tier').textContent = tier;
+  document.getElementById('result-circle').textContent = circle;
+
+  // Мана
+  let manaCost = Math.round(finalIM / 3);
+  if (terminalLevel === 'minimal') manaCost = Math.round(baseIM / 3 * 1.5);
+  // ИМ улучшения (Награда или Идеальное сопряжение)
+  const showUpgrade = isReward || terminalLevel === 'ideal';
+  const upgradeBlock = document.getElementById('result-upgrade-block');
+  if (showUpgrade) {
+    document.getElementById('result-upgrade').textContent = Math.round(finalIM / 2);
+    upgradeBlock.style.display = '';
+  } else {
+    upgradeBlock.style.display = 'none';
+  }
+
+  document.getElementById('result-mana').textContent = manaCost + ' ИМ';
+
+  document.getElementById('calculation-steps').innerHTML = steps.map(s => `<div class="step">${s}</div>`).join('');
+}
+
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('change', calculateIM);
+  el.addEventListener('input', calculateIM);
+});
+
+calculateIM();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВЕЧНЫЙ ДАНЖ · БЕСТИАРИЙ</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bestiary.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">[ ВЕЧНЫЙ ДАНЖ ]</a>
+  <nav class="site-nav">
+    <a href="index.html">БАЗА</a>
+    <a href="calc.html">ТЕРМИНАЛ ИМ</a>
+    <a href="elements.html">ЭЛЕМЕНТЫ</a>
+    <a href="classes.html">КЛАССЫ</a>
+    <a href="bestiary.html" style="color:var(--green)">БЕСТИАРИЙ</a>
+    <a href="anketa.html">АНКЕТНИЦА</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="page-title">// БАЗА ДАННЫХ</div>
+  <h1 class="page-heading">Бестиарий</h1>
+  <p class="page-sub">Реестр существ · <span id="monster-count">0</span> записей</p>
+
+  <div class="filters-row">
+    <input class="filter-search" type="text" id="search-input" placeholder="поиск по названию...">
+    <button class="filter-btn active" data-type="all">ВСЕ</button>
+    <button class="filter-btn" data-type="☣️">☣️</button>
+    <button class="filter-btn" data-type="☯️">☯️</button>
+    <button class="filter-btn" data-type="✴️">✴️</button>
+    <button class="filter-btn" data-type="⚫️">⚫️</button>
+    <button class="filter-btn" data-type="☸️">☸️</button>
+    <button class="filter-btn" data-type="👿">👿</button>
+    <button class="filter-btn" data-type="⚖️">⚖️</button>
+    <button class="filter-btn" data-type="🪩">🪩</button>
+    <button class="filter-btn" data-type="⚡️">⚡️</button>
+    <button class="filter-btn" data-type="🔱">🔱</button>
+    <button class="filter-btn" data-type="💀">💀</button>
+    <button class="filter-btn" data-type="⚙️">⚙️</button>
+    <button class="filter-btn" data-type="🧪">🧪</button>
+    <button class="filter-btn" data-type="💎">💎</button>
+    <button class="filter-btn" data-type="💨">💨</button>
+    <button class="filter-btn" data-type="💧">💧</button>
+    <button class="filter-btn" data-type="🩸">🩸</button>
+    <button class="filter-btn" data-type="🌿">🌿</button>
+    <button class="filter-btn" data-type="🍄">🍄</button>
+    <button class="filter-btn" data-type="☢️">☢️</button>
+    <button class="filter-btn" data-type="💠">💠</button>
+    <button class="filter-btn" data-type="♻️">♻️</button>
+    <button class="filter-btn" data-type="❓">❓</button>
+    <button class="btn-new" id="btn-create">+ СОЗДАТЬ МОНСТРА</button>
+  </div>
+
+  <div class="cards-grid" id="cards-grid">
+    <div class="empty-state">
+      <span>[ — ]</span>
+      Монстров пока нет. Создайте первого.
+    </div>
+  </div>
+</main>
+
+<!-- VIEW MODAL -->
+<div class="modal-overlay" id="view-modal">
+  <div class="modal">
+    <button class="modal-close" id="view-close">✕</button>
+    <div class="modal-title">// КАРТОЧКА СУЩЕСТВА</div>
+    <div id="view-content"></div>
+  </div>
+</div>
+
+<!-- EDIT/CREATE MODAL -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <button class="modal-close" id="edit-close">✕</button>
+    <div class="modal-title" id="edit-modal-title">// СОЗДАТЬ МОНСТРА</div>
+
+    <div class="form-section-title">ОСНОВНОЕ</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">НАЗВАНИЕ</label>
+        <input class="form-input" id="f-name" type="text" placeholder="Название существа">
+      </div>
+      <div class="form-group">
+        <label class="form-label">ТИП ЦЕПИ</label>
+        <select class="form-select" id="f-type">
+          <option value="">— выберите тип —</option>
+          <option value="☣️">☣️ Плоть</option>
+          <option value="☯️">☯️ Дух</option>
+          <option value="✴️">✴️ Магия</option>
+          <option value="⚫️">⚫️ Пустота</option>
+          <option value="☸️">☸️ Хаос</option>
+          <option value="👿">👿 Преисподняя</option>
+          <option value="⚖️">⚖️ Порядок</option>
+          <option value="🪩">🪩 Астрал</option>
+          <option value="⚡️">⚡️ Энергия</option>
+          <option value="🔱">🔱 Мематика</option>
+          <option value="💀">💀 Некротизм</option>
+          <option value="⚙️">⚙️ Механизм</option>
+          <option value="🧪">🧪 Химия</option>
+          <option value="💎">💎 Камень</option>
+          <option value="💨">💨 Газ</option>
+          <option value="💧">💧 Жидкость</option>
+          <option value="🩸">🩸 Кровь</option>
+          <option value="🌿">🌿 Растения</option>
+          <option value="🍄">🍄 Грибы</option>
+          <option value="☢️">☢️ Радиация</option>
+          <option value="💠">💠 Фрактал</option>
+          <option value="♻️">♻️ Инкарнация</option>
+          <option value="❓">❓ Неизвестно</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">СВОЙСТВА</label>
+        <select class="form-select" id="f-properties">
+          <option value="">— выберите свойства —</option>
+          <option value="⚫️">⚫️ Материальная</option>
+          <option value="🌐">🌐 Полуматериальная</option>
+          <option value="⚪️">⚪️ Нематериальная</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">РЕДКОСТЬ</label>
+        <select class="form-select" id="f-rarity">
+          <option value="⚪️">⚪️ Обычные</option>
+          <option value="🔵">🔵 Необычные</option>
+          <option value="🟣">🟣 Редкие</option>
+          <option value="🟡">🟡 Эпические</option>
+          <option value="🔴">🔴 Легендарные</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group full">
+      <label class="form-label">ОПИСАНИЕ</label>
+      <textarea class="form-textarea" id="f-description" placeholder="Описание существа..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">РАСПРОСТРАНЕНИЕ</label>
+      <input class="form-input" id="f-distribution" type="text" placeholder="Например: 2 этаж и ниже">
+    </div>
+
+    <div class="form-section-title">УЯЗВИМОСТИ</div>
+    <div class="damage-selector" data-type="vulnerabilities">
+      <span class="damage-option" data-value="🪓">🪓</span>
+      <span class="damage-option" data-value="❄️">❄️</span>
+      <span class="damage-option" data-value="🔥">🔥</span>
+      <span class="damage-option" data-value="☢️">☢️</span>
+      <span class="damage-option" data-value="🧪">🧪</span>
+      <span class="damage-option" data-value="☀️">☀️</span>
+      <span class="damage-option" data-value="🌒">🌒</span>
+      <span class="damage-option" data-value="✨">✨</span>
+      <span class="damage-option" data-value="⚡️">⚡️</span>
+      <span class="damage-option" data-value="💀">💀</span>
+      <span class="damage-option" data-value="🔱">🔱</span>
+      <span class="damage-option" data-value="🌸">🌸</span>
+      <span class="damage-option" data-value="🦇">🦇</span>
+      <span class="damage-option" data-value="🌐">🌐</span>
+      <span class="damage-option" data-value="⚫️">⚫️</span>
+      <span class="damage-option" data-value="🪩">🪩</span>
+      <span class="damage-option" data-value="👿">👿</span>
+      <span class="damage-option" data-value="⚖️">⚖️</span>
+      <span class="damage-option" data-value="💠">💠</span>
+      <span class="damage-option" data-value="☸️">☸️</span>
+    </div>
+
+    <div class="form-section-title">СТАНДАРТНЫЙ УРОН</div>
+    <div class="damage-selector" data-type="standardDamage">
+      <span class="damage-option" data-value="🪓">🪓</span>
+      <span class="damage-option" data-value="❄️">❄️</span>
+      <span class="damage-option" data-value="🔥">🔥</span>
+      <span class="damage-option" data-value="☢️">☢️</span>
+      <span class="damage-option" data-value="🧪">🧪</span>
+      <span class="damage-option" data-value="☀️">☀️</span>
+      <span class="damage-option" data-value="🌒">🌒</span>
+      <span class="damage-option" data-value="✨">✨</span>
+      <span class="damage-option" data-value="⚡️">⚡️</span>
+      <span class="damage-option" data-value="💀">💀</span>
+      <span class="damage-option" data-value="🔱">🔱</span>
+      <span class="damage-option" data-value="🌸">🌸</span>
+      <span class="damage-option" data-value="🦇">🦇</span>
+      <span class="damage-option" data-value="🌐">🌐</span>
+      <span class="damage-option" data-value="⚫️">⚫️</span>
+      <span class="damage-option" data-value="🪩">🪩</span>
+      <span class="damage-option" data-value="👿">👿</span>
+      <span class="damage-option" data-value="⚖️">⚖️</span>
+      <span class="damage-option" data-value="💠">💠</span>
+      <span class="damage-option" data-value="☸️">☸️</span>
+    </div>
+
+    <div class="form-section-title">СОПРОТИВЛЕНИЯ</div>
+    <div class="damage-selector" data-type="resistances">
+      <span class="damage-option" data-value="🪓">🪓</span>
+      <span class="damage-option" data-value="❄️">❄️</span>
+      <span class="damage-option" data-value="🔥">🔥</span>
+      <span class="damage-option" data-value="☢️">☢️</span>
+      <span class="damage-option" data-value="🧪">🧪</span>
+      <span class="damage-option" data-value="☀️">☀️</span>
+      <span class="damage-option" data-value="🌒">🌒</span>
+      <span class="damage-option" data-value="✨">✨</span>
+      <span class="damage-option" data-value="⚡️">⚡️</span>
+      <span class="damage-option" data-value="💀">💀</span>
+      <span class="damage-option" data-value="🔱">🔱</span>
+      <span class="damage-option" data-value="🌸">🌸</span>
+      <span class="damage-option" data-value="🦇">🦇</span>
+      <span class="damage-option" data-value="🌐">🌐</span>
+      <span class="damage-option" data-value="⚫️">⚫️</span>
+      <span class="damage-option" data-value="🪩">🪩</span>
+      <span class="damage-option" data-value="👿">👿</span>
+      <span class="damage-option" data-value="⚖️">⚖️</span>
+      <span class="damage-option" data-value="💠">💠</span>
+      <span class="damage-option" data-value="☸️">☸️</span>
+    </div>
+
+    <div class="form-section-title">ИММУНИТЕТЫ</div>
+    <div class="damage-selector" data-type="immunities">
+      <span class="damage-option" data-value="🪓">🪓</span>
+      <span class="damage-option" data-value="❄️">❄️</span>
+      <span class="damage-option" data-value="🔥">🔥</span>
+      <span class="damage-option" data-value="☢️">☢️</span>
+      <span class="damage-option" data-value="🧪">🧪</span>
+      <span class="damage-option" data-value="☀️">☀️</span>
+      <span class="damage-option" data-value="🌒">🌒</span>
+      <span class="damage-option" data-value="✨">✨</span>
+      <span class="damage-option" data-value="⚡️">⚡️</span>
+      <span class="damage-option" data-value="💀">💀</span>
+      <span class="damage-option" data-value="🔱">🔱</span>
+      <span class="damage-option" data-value="🌸">🌸</span>
+      <span class="damage-option" data-value="🦇">🦇</span>
+      <span class="damage-option" data-value="🌐">🌐</span>
+      <span class="damage-option" data-value="⚫️">⚫️</span>
+      <span class="damage-option" data-value="🪩">🪩</span>
+      <span class="damage-option" data-value="👿">👿</span>
+      <span class="damage-option" data-value="⚖️">⚖️</span>
+      <span class="damage-option" data-value="💠">💠</span>
+      <span class="damage-option" data-value="☸️">☸️</span>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-delete" id="btn-delete" style="display:none">УДАЛИТЬ</button>
+      <button class="btn-cancel" id="btn-cancel-edit">ОТМЕНА</button>
+      <button class="btn-save" id="btn-save">СОХРАНИТЬ</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<!-- Firebase Config -->
+<script src="firebase-config.js?v=2"></script>
+<script src="firebase.js?v=2"></script>
+<!-- App Scripts -->
+<script src="bestiary.js?v=2"></script>
+</body>
+</html>

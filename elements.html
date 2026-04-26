@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВЕЧНЫЙ ДАНЖ · ЭЛЕМЕНТЫ</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080f0a;
+  --bg2: #0c1510;
+  --bg3: #101d14;
+  --border: #1a3d2b;
+  --border2: #2a5a3a;
+  --green: #00ff88;
+  --green2: #00cc66;
+  --green3: #7aaa8a;
+  --green4: #3a6a4a;
+  --text: #c8ffd4;
+  --muted: #5a8a6a;
+  --dim: #2a4a35;
+  --red: #cc4444;
+  --amber: #ccaa00;
+  --mono: 'Share Tech Mono', monospace;
+  --sans: 'Exo 2', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  min-height: 100vh;
+}
+
+.site-header {
+  border-bottom: 0.5px solid var(--border);
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.site-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 3px;
+  text-decoration: none;
+}
+.site-nav { display: flex; gap: 1.5rem; }
+.site-nav a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color .2s;
+}
+.site-nav a:hover { color: var(--green); }
+.site-nav a.active { color: var(--green); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+.page-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green2);
+  letter-spacing: 4px;
+  margin-bottom: 0.4rem;
+}
+.page-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 0.25rem;
+}
+.page-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.elements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-bottom: 2rem;
+}
+
+.element-card {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: border-color .2s, background .2s;
+}
+.element-card:hover {
+  border-color: var(--green2);
+  background: var(--bg3);
+}
+
+.element-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.element-icon {
+  font-size: 32px;
+}
+
+.element-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.element-description {
+  font-size: 13px;
+  color: var(--green3);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.element-details {
+  border-top: 0.5px solid var(--border);
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.detail-label {
+  color: var(--muted);
+  font-family: var(--mono);
+  letter-spacing: 1px;
+}
+.detail-value {
+  color: var(--text);
+}
+
+.info-section {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-section h3 {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--green2);
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+}
+
+.info-section p {
+  font-size: 13px;
+  color: var(--green3);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">[ ВЕЧНЫЙ ДАНЖ ]</a>
+  <nav class="site-nav">
+    <a href="index.html">БАЗА</a>
+    <a href="calc.html">ТЕРМИНАЛ ИМ</a>
+    <a href="elements.html" class="active">ЭЛЕМЕНТЫ</a>
+    <a href="classes.html">КЛАССЫ</a>
+    <a href="bestiary.html">БЕСТИАРИЙ</a>
+    <a href="anketa.html">АНКЕТНИЦА</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="page-title">// БАЗА ДАННЫХ</div>
+  <h1 class="page-heading">Элементы</h1>
+  <p class="page-sub">Школы магии и их характеристики</p>
+
+  <div class="info-section">
+    <h3>О ШКОЛАХ МАГИИ</h3>
+    <p>
+      В Вечном Данже существует множество школ магии, каждая из которых представляет собой уникальный подход к
+      манипуляции реальностью. От классических стихий до экзотических концепций — магия здесь не имеет границ.
+    </p>
+    <p>
+      Школы магии могут взаимодействовать друг с другом, усиливая или ослабляя эффекты. Некоторые сочетания
+      создают новые, гибридные формы магии, недоступные при использовании одной школы.
+    </p>
+  </div>
+
+  <div class="elements-grid">
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">🔥</span>
+        <span class="element-name">Пиромантия</span>
+      </div>
+      <div class="element-description">
+        Магия огня и тепла. Позволяет создавать и контролировать пламя, повышать температуру,
+        наносить термический урон.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Стихийная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ПРОТИВОПОЛОЖНОСТЬ</span>
+          <span class="detail-value">💧 Гидромантия</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">💧</span>
+        <span class="element-name">Гидромантия / Криомантия</span>
+      </div>
+      <div class="element-description">
+        Магия воды и льда. Контроль жидкостей, создание льда, управление влажностью.
+        Криомантия — специализация на низких температурах.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Стихийная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ПРОТИВОПОЛОЖНОСТЬ</span>
+          <span class="detail-value">🔥 Пиромантия</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">🌪️</span>
+        <span class="element-name">Аэромантия</span>
+      </div>
+      <div class="element-description">
+        Магия воздуха и ветра. Контроль атмосферных явлений, создание ветров,
+        полёт, манипуляция давлением.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Стихийная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">СИНЕРГИЯ</span>
+          <span class="detail-value">🔥💧 Комбинации</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">💎</span>
+        <span class="element-name">Литомантия</span>
+      </div>
+      <div class="element-description">
+        Магия земли и камней. Контроль почвы, создание конструкций, манипуляция
+        минералами и кристаллами.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Стихийная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">СИНЕРГИЯ</span>
+          <span class="detail-value">🌪️💧 Комбинации</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">🌿</span>
+        <span class="element-name">Природа</span>
+      </div>
+      <div class="element-description">
+        Магия жизни и роста. Контроль растений, ускорение заживления,
+        коммуникация с живыми существами.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Жизненная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Исцеление</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">🌒</span>
+        <span class="element-name">Тенебромантия</span>
+      </div>
+      <div class="element-description">
+        Магия тьмы и теней. Манипуляция отсутствием света, создание теневых
+        конструкций, скрытность и ассасинация.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Тёмная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ПРОТИВОПОЛОЖНОСТЬ</span>
+          <span class="detail-value">☀️ Люминомантия</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">☀️</span>
+        <span class="element-name">Люминомантия</span>
+      </div>
+      <div class="element-description">
+        Магия света и освещения. Создание света, излечение теневых эффектов,
+        проникновение сквозь иллюзии.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Светлая</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ПРОТИВОПОЛОЖНОСТЬ</span>
+          <span class="detail-value">🌒 Тенебромантия</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">👻</span>
+        <span class="element-name">Магия изнанки</span>
+      </div>
+      <div class="element-description">
+        Магия пространства между мирами. Доступ к измерениям вне обычной
+        реальности, манипуляция порталами.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Пространственная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Порталы</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">🌐</span>
+        <span class="element-name">Магия астрала</span>
+      </div>
+      <div class="element-description">
+        Магия астрального плана. Проекция сознания, путешествия вне тела,
+        взаимодействие с духовными сущностями.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Духовная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Астральная проекция</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">💠</span>
+        <span class="element-name">Магия фрактала</span>
+      </div>
+      <div class="element-description">
+        Магия самоподобия и рекурсии. Создание фрактальных структур,
+        бесконечное разделение и умножение эффектов.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Математическая</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Рекурсия</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">😈</span>
+        <span class="element-name">Магия преисподней</span>
+      </div>
+      <div class="element-description">
+        Магия демонических планов. Вызов демонов, использование тёмной энергии,
+        проклятия и порчи.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Демоническая</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Вызов существ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">☸️</span>
+        <span class="element-name">Магия хаоса</span>
+      </div>
+      <div class="element-description">
+        Магия беспорядка и энтропии. Разрушение структур, непредсказуемые эффекты,
+        усиление через хаос.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Хаотическая</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ПРОТИВОПОЛОЖНОСТЬ</span>
+          <span class="detail-value">⚖️ Порядок</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">⚫</span>
+        <span class="element-name">Магия пустоты</span>
+      </div>
+      <div class="element-description">
+        Магия отсутствия и уничтожения. Стирание существования, создание пустот,
+        аннигиляция материи.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Разрушительная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Аннигиляция</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">🩸</span>
+        <span class="element-name">Сангвимантия</span>
+      </div>
+      <div class="element-description">
+        Магия крови и жизненной силы. Контроль крови, вампиризм,
+        манипуляция жизненной энергией.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Жизненная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Вампиризм</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">🔱</span>
+        <span class="element-name">Мематика</span>
+      </div>
+      <div class="element-description">
+        Магия разума и памяти. Чтение мыслей, манипуляция памятью,
+        создание ментальных конструкций.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Ментальная</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Телепатия</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="element-card">
+      <div class="element-header">
+        <span class="element-icon">✨</span>
+        <span class="element-name">Астрокинез</span>
+      </div>
+      <div class="element-description">
+        Магия звёзд и космоса. Манипуляция гравитацией, контроль небесных тел,
+        космическая энергия.
+      </div>
+      <div class="element-details">
+        <div class="detail-row">
+          <span class="detail-label">ТИП</span>
+          <span class="detail-value">Космическая</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ОСОБЕННОСТЬ</span>
+          <span class="detail-value">Гравитация</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

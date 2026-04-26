@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВЕЧНЫЙ ДАНЖ · БАЗА</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080f0a;
+  --bg2: #0c1510;
+  --bg3: #101d14;
+  --border: #1a3d2b;
+  --border2: #2a5a3a;
+  --green: #00ff88;
+  --green2: #00cc66;
+  --green3: #7aaa8a;
+  --green4: #3a6a4a;
+  --text: #c8ffd4;
+  --muted: #5a8a6a;
+  --dim: #2a4a35;
+  --red: #cc4444;
+  --amber: #ccaa00;
+  --mono: 'Share Tech Mono', monospace;
+  --sans: 'Exo 2', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  min-height: 100vh;
+}
+
+.site-header {
+  border-bottom: 0.5px solid var(--border);
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.site-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 3px;
+  text-decoration: none;
+}
+.site-nav { display: flex; gap: 1.5rem; }
+.site-nav a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color .2s;
+}
+.site-nav a:hover { color: var(--green); }
+.site-nav a.active { color: var(--green); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin-bottom: 3rem;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg2);
+}
+.hero-title {
+  font-family: var(--mono);
+  font-size: 24px;
+  color: var(--green);
+  letter-spacing: 6px;
+  margin-bottom: 1rem;
+}
+.hero-subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-value {
+  font-family: var(--mono);
+  font-size: 32px;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+
+.section-title {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--green2);
+  letter-spacing: 4px;
+  margin-bottom: 1.5rem;
+  border-bottom: 0.5px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 3rem;
+}
+.nav-card {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  transition: border-color .2s, background .2s;
+  text-decoration: none;
+  display: block;
+}
+.nav-card:hover {
+  border-color: var(--green2);
+  background: var(--bg3);
+}
+.nav-card-icon {
+  font-size: 24px;
+  margin-bottom: 0.75rem;
+}
+.nav-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+.nav-card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.info-section {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  border-radius: 6px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.info-section h3 {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--green2);
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+}
+.info-section p {
+  font-size: 14px;
+  color: var(--green3);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+</style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<!-- Firebase Config -->
+<script src="firebase-config.js"></script>
+<script src="firebase.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">[ ВЕЧНЫЙ ДАНЖ ]</a>
+  <nav class="site-nav">
+    <a href="index.html" class="active">БАЗА</a>
+    <a href="calc.html">ТЕРМИНАЛ ИМ</a>
+    <a href="elements.html">ЭЛЕМЕНТЫ</a>
+    <a href="classes.html">КЛАССЫ</a>
+    <a href="bestiary.html">БЕСТИАРИЙ</a>
+    <a href="anketa.html">АНКЕТНИЦА</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="hero">
+    <div class="hero-title">ВЕЧНЫЙ ДАНЖ</div>
+    <div class="hero-subtitle">
+      Бесконечное подземелье, где каждый этаж — новый мир.<br>
+      Сталкеры спускаются вглубь, ищут фрагменты, выживают.<br>
+      Система фрагментов, терминалы, магия, хаос.
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-value" id="stat-characters">0</div>
+        <div class="stat-label">АНКЕТ</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="stat-monsters">0</div>
+        <div class="stat-label">МОНСТРОВ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">// НАВИГАЦИЯ</div>
+  <div class="cards-grid">
+    <a href="anketa.html" class="nav-card">
+      <div class="nav-card-icon">📋</div>
+      <div class="nav-card-title">Анкетница</div>
+      <div class="nav-card-desc">Создавайте и управляйте анкетами персонажей. Характеристики, способности, геном.</div>
+    </a>
+    <a href="bestiary.html" class="nav-card">
+      <div class="nav-card-icon">👹</div>
+      <div class="nav-card-title">Бестиарий</div>
+      <div class="nav-card-desc">База знаний о существах Данжа. Типы, уязвимости, сопротивления.</div>
+    </a>
+    <a href="calc.html" class="nav-card">
+      <div class="nav-card-icon">⚡</div>
+      <div class="nav-card-title">Терминал ИМ</div>
+      <div class="nav-card-desc">Калькулятор индекса мощи. Расчёт модификаторов, тиров, стоимости.</div>
+    </a>
+    <a href="elements.html" class="nav-card">
+      <div class="nav-card-icon">🔮</div>
+      <div class="nav-card-title">Элементы</div>
+      <div class="nav-card-desc">Школы магии и их взаимодействия. Пиромантия, гидромантия, аэромантия и другие.</div>
+    </a>
+    <a href="classes.html" class="nav-card">
+      <div class="nav-card-icon">⚔️</div>
+      <div class="nav-card-title">Классы</div>
+      <div class="nav-card-desc">Доступные классы персонажей. Бонусы, особенности, пути развития.</div>
+    </a>
+  </div>
+
+  <div class="section-title">// О МИРЕ</div>
+  <div class="info-section">
+    <h3>СИСТЕМА ФРАГМЕНТОВ</h3>
+    <p>
+      Монстры на каждом этаже отличаются. Условный метаморф на первом этаже и на втором будут значительно отличаться.
+      При установке на терминалах они будут иметь разный эффект.
+    </p>
+    <p>
+      У каждого фрагмента есть индекс мощи (ИМ) — показатель того, с какого этажа был взят фрагмент.
+      ИМ является основополагающей деталью в создании модификаций, а также в силе самой модификации.
+    </p>
+  </div>
+
+  <div class="info-section">
+    <h3>ТЕРМИНАЛЫ</h3>
+    <p>
+      Терминалы — устройства для встраивания фрагментов. У них есть 4 уровня сопряжения: Идеальный, Улучшенный,
+      Удовлетворительный и Минимальный. От уровня сопряжения зависит итоговый ИМ и стоимость модификации.
+    </p>
+  </div>
+
+  <div class="info-section">
+    <h3>МАГИЯ</h3>
+    <p>
+      В Данже существует множество школ магии: от классических пиромантии и гидромантии до экзотических мематики и
+      магии фрактала. Каждая школа имеет свои особенности и взаимодействия с другими элементами.
+    </p>
+  </div>
+</main>
+
+<script>
+// Load statistics from Firebase
+async function loadStats() {
+  try {
+    const characters = await getCollection('characters');
+    const monsters = await getCollection('monsters');
+
+    document.getElementById('stat-characters').textContent = characters.length;
+    document.getElementById('stat-monsters').textContent = monsters.length;
+  } catch (error) {
+    console.error('Error loading stats:', error);
+  }
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  loadStats();
+});
+</script>
+
+</body>
+</html>
